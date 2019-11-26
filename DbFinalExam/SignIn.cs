@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace DbFinalExam
 {
-    public partial class Form1 : Form
+    public partial class SignIn : Form
     {
-        public Form1()
+        public SignIn()
         {
             InitializeComponent();
+        }
+
+        private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
