@@ -12,7 +12,8 @@ namespace DbFinalExam
         public static string Server { get; set; }
         public static string UserName { get; set; }
         public static string Password { get; set; }
-        public static string ConnectionStr => $@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public static string ConnectionStr => 
+            $@"Data Source={Server};Initial Catalog={Database};User Id={UserName};Password={Password}";
     }
 
     static class Program
