@@ -55,6 +55,8 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBoxLocId = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.textBoxLocSize = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.textBoxLocTel = new System.Windows.Forms.TextBox();
@@ -69,8 +71,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
-            this.textBoxLocId = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -336,6 +336,22 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Location";
             // 
+            // textBoxLocId
+            // 
+            this.textBoxLocId.Location = new System.Drawing.Point(141, 13);
+            this.textBoxLocId.Name = "textBoxLocId";
+            this.textBoxLocId.Size = new System.Drawing.Size(100, 20);
+            this.textBoxLocId.TabIndex = 16;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(20, 16);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(59, 13);
+            this.label18.TabIndex = 17;
+            this.label18.Text = "LocationID";
+            // 
             // textBoxLocSize
             // 
             this.textBoxLocSize.Location = new System.Drawing.Point(141, 168);
@@ -449,22 +465,6 @@
             this.button2.Text = "Add Location";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
-            // 
-            // textBoxLocId
-            // 
-            this.textBoxLocId.Location = new System.Drawing.Point(141, 13);
-            this.textBoxLocId.Name = "textBoxLocId";
-            this.textBoxLocId.Size = new System.Drawing.Size(100, 20);
-            this.textBoxLocId.TabIndex = 16;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(20, 16);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(59, 13);
-            this.label18.TabIndex = 17;
-            this.label18.Text = "LocationID";
             // 
             // AddCustomer
             // 

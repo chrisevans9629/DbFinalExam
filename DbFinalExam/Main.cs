@@ -32,5 +32,11 @@ namespace DbFinalExam
             var addCust = new AddCustomer();
             addCust.ShowDialog();
         }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            var addCust = new AddEstimate();
+            addCust.ShowDialog();
+        }
     }
 }
