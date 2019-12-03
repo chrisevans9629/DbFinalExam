@@ -71,6 +71,9 @@
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
     <Compile Include="Sql.cs" />
+    <EmbeddedResource Include="AddCustomer.resx">
+      <DependentUpon>AddCustomer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
