@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -48,7 +50,27 @@ namespace DbFinalExam
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            using (var db = new SqlConnection(Connection.ConnectionStr))
+            {
+                
+                db.Open();
+                var tran = db.BeginTransaction();
+                try
+                {
+                    db.Execute("insert into Customer() values ()",null,tran);
 
+                    foreach (var location in Locations)
+                    {
+                        db.Execute("insert into Location() values ()", null, tran);
+                    }
+                    tran.Commit();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    tran.Rollback();
+                }
+            }
         }
     }
 }
