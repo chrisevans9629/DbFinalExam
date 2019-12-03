@@ -37,6 +37,7 @@
             this.textBoxUsr = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxPwd = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -121,14 +122,27 @@
             this.textBoxPwd.Location = new System.Drawing.Point(206, 154);
             this.textBoxPwd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBoxPwd.Name = "textBoxPwd";
+            this.textBoxPwd.PasswordChar = '*';
             this.textBoxPwd.Size = new System.Drawing.Size(200, 31);
             this.textBoxPwd.TabIndex = 7;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(122, 198);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(140, 54);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Exit";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // SignIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(506, 331);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxPwd);
             this.Controls.Add(this.label3);
@@ -158,5 +172,6 @@
         private System.Windows.Forms.TextBox textBoxUsr;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxPwd;
+        private System.Windows.Forms.Button button2;
     }
 }
