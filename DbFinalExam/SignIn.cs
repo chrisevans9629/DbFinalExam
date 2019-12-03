@@ -50,7 +50,15 @@ namespace DbFinalExam
                 Console.WriteLine(exception);
                 MessageBox.Show(exception.ToString());
             }
-           
+
+        }
+
+        private void SignIn_Load(object sender, EventArgs e)
+        {
+            textBoxDb.Text = Connection.Database;
+            textBoxPwd.Text = Connection.Password;
+            textBoxServer.Text = Connection.Server;
+            textBoxUsr.Text = Connection.UserName;
         }
     }
 }
