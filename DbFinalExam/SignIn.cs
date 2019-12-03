@@ -63,7 +63,7 @@ namespace DbFinalExam
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Applicati
+            Application.Exit();
         }
     }
 }

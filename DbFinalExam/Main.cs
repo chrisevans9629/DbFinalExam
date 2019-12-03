@@ -26,5 +26,11 @@ namespace DbFinalExam
         {
             Application.Exit();
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            var addCust = new AddCustomer();
+            addCust.ShowDialog();
+        }
     }
 }
