@@ -39,7 +39,7 @@ namespace DbFinalExam
             {
                 using (var db = new SqlConnection(Connection.ConnectionStr))
                 {
-                    db.OpenAsync();
+                    db.Open();
                 }
                 Hide();
                 var main = new Main();
