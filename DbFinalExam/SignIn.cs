@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,31 @@ namespace DbFinalExam
         private void Label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Connection.Database = textBoxDb.Text;
+            Connection.Password = textBoxPwd.Text;
+            Connection.Server = textBoxServer.Text;
+            Connection.UserName = textBoxUsr.Text;
+
+            try
+            {
+                using (var db = new SqlConnection(Connection.ConnectionStr))
+                {
+                    db.OpenAsync();
+                }
+                Hide();
+                var main = new Main();
+                main.Show();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                MessageBox.Show(exception.ToString());
+            }
+           
         }
     }
 }
