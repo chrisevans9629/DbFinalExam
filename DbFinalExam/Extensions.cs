@@ -22,7 +22,8 @@ namespace DbFinalExam
 
                 cbo.DataSource = newDataset;
                 cbo.DisplayMember = $"test.{sqlColumnName}";
-                cbo.SelectedIndex = 0;
+                if (cbo.Items.Count > 0)
+                    cbo.SelectedIndex = 0;
             }
         }
 
@@ -63,7 +64,7 @@ namespace DbFinalExam
                 dgv.DataSource = newDataset;
                 dgv.DataMember = "test";
             }
-              
+
         }
     }
 }
