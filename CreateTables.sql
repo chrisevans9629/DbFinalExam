@@ -90,4 +90,15 @@ insert BusinessConsultant(EmployeeID) values (3);
 insert BusinessConsultant(EmployeeID) values (5);
 insert TechnicalConsultant(EmployeeID) values (1);
 
+insert Customer(CustomerID,CompanyName, Street, City, State, 
+	ZipCode, ContactName, ContactTitle, ContactTelephone,
+	BusinessType, NumberOfEmployees) 
+	values 
+	(10,'Peerless Products Inc.', '4320 Main St.', 'Fort Scott', 'KS', '66701', 'Steven Burn','IT Manager', '667-123-4654', 'Manufacturing', 400);
+
+insert Location(CustomerID,LocationID, BuildingSize, Street, City, State, ZipCode, Telephone)
+	values (10,1,1000,'4320 Main St.', 'Fort Scott', 'KS', '66701', '667-123-3453');
+
+
+select ServiceId, (CONVERT(varchar(10), ServiceId) + '-' + Description) as FullName from Service
 commit tran

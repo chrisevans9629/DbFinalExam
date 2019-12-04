@@ -11,9 +11,10 @@ namespace DbFinalExam
         {
             var dbConnectionString = Connection.ConnectionStr;
             using (var newAdapter = new SqlDataAdapter())
-            using (var newDataset = new DataSet())
             using (var openConnection = new SqlConnection(dbConnectionString))
             {
+                var newDataset = new DataSet();
+                    
                 newAdapter.SelectCommand = new SqlCommand(sql, openConnection);
                 newAdapter.SelectCommand.Connection = openConnection;
 
@@ -32,9 +33,9 @@ namespace DbFinalExam
         {
             var dbConnectionString = Connection.ConnectionStr;
             using (var newAdapter = new SqlDataAdapter())
-            using (var newDataset = new DataSet())
             using (var openConnection = new SqlConnection(dbConnectionString))
             {
+                var newDataset = new DataSet();
                 newAdapter.SelectCommand = new SqlCommand(sql, openConnection);
                 newAdapter.SelectCommand.Connection = openConnection;
 
@@ -51,9 +52,9 @@ namespace DbFinalExam
         {
             var dbConnectionString = Connection.ConnectionStr;
             using (var newAdapter = new SqlDataAdapter())
-            using (var newDataset = new DataSet())
             using (var openConnection = new SqlConnection(dbConnectionString))
             {
+                var newDataset = new DataSet();
                 newAdapter.SelectCommand = new SqlCommand(sql, openConnection);
                 newAdapter.SelectCommand.Connection = openConnection;
 

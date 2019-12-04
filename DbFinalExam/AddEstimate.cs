@@ -20,9 +20,16 @@ namespace DbFinalExam
 
         private void AddEstimate_Load(object sender, EventArgs e)
         {
+            Refresh();
+        }
+
+        private void Refresh()
+        {
             comboBoxCustomer.BindQuery("select * from Customer", "CompanyName");
-            comboBoxBusCon.BindQuery("select * from Consultant c, BusinessConsultant bc where bc.EmployeeID = c.EmployeeID", "LastName");
-            comboBoxServices.BindQuery("select ServiceId, ServiceId + ' ' + Description as Full from Service", "Full");
+            comboBoxBusCon.BindQuery("select * from Consultant c, BusinessConsultant bc where bc.EmployeeID = c.EmployeeID",
+                "LastName");
+            comboBoxServices.BindQuery(
+                "select ServiceId, (CONVERT(varchar(10), ServiceId) + '-' + Description) as FullName from Service", "FullName");
             this.dataGridView1.BindQuery("select * from Estimate");
             this.dateTimePicker.Value = DateTime.Today;
             this.textBoxAmount.Text = "0";
@@ -53,6 +60,11 @@ namespace DbFinalExam
                     p.Execute("insert into Estimate_Has_Service() values ()", null, t);
                 }
             });
+        }
+
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            Refresh();
         }
     }
 }
