@@ -274,6 +274,22 @@ insert Location(CustomerID,LocationID, BuildingSize, Street, City, State, ZipCod
 insert Location(CustomerID,LocationID, BuildingSize, Street, City, State, ZipCode, Telephone)
 	values (14,1,4566,'2345 Main St.', 'Pittsburg', 'KS', '66762', '667-123-4452');
 
+INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (1,10,1,2000,'12/30/2019');
+INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (1,10);
+INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (1,12);
+
+INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (2,11,2,300,'1/3/2020');
+INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (2,11);
+
+INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (3,12,3,3000,'2/6/2020');
+INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (3,13);
+
+INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (4,13,4,700,'1/15/2020');
+INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (4,14);
+INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (4,11);
+
+INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (5,14,5,3000,'3/5/2020');
+INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (5,13);
 
 INSERT INTO TechnicalConsultantHasDegree(DegreeID,EmployeeID) VALUES ('ACCTG',6);
 INSERT INTO TechnicalConsultantHasDegree(DegreeID,EmployeeID) VALUES ('CS',7);
