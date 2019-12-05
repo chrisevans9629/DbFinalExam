@@ -1,6 +1,7 @@
 ﻿begin tran
+begin try
 Create table Customer (
-	CustomerID int primary key,
+	CustomerID int,
 	CompanyName varchar(45) not null,
 	Street varchar(45),
 	City varchar(45),
@@ -10,23 +11,9 @@ Create table Customer (
 	ContactTitle varchar(45) not null,
 	ContactTelephone varchar(45) not null,
 	BusinessType varchar(45),
-	NumberOfEmployees int);
-Create table Consultant (
-	EmployeeID int primary key,
-	FirstName varchar(45) not null,
-	LastName varchar(45) not null,
-	Street varchar(45),
-	City varchar(45),
-	State char(2),
-	ZipCode varchar(15),
-	Telephone varchar(45) not null,
-	DateOfBirth date,
-	Age int);
-Create Table BusinessConsultant(
-	EmployeeID int primary key references Consultant(EmployeeID));
-
-Create Table TechnicalConsultant(
-	EmployeeID int primary key references Consultant(EmployeeID));
+	NumberOfEmployees int,
+	Primary Key(CustomerID)
+	);
 
 Create table Location(
 	LocationID int,
@@ -39,41 +26,106 @@ Create table Location(
 	BuildingSize int,
 	Primary Key(LocationID, CustomerID));
 
+Create table Consultant(
+	EmployeeID int,
+	FirstName varchar(45) not null,
+	LastName varchar(45) not null,
+	Street varchar(45),
+	City varchar(45),
+	State char(2),
+	ZipCode varchar(15),
+	Telephone varchar(45),
+	DateOfBirth date not null,
+	Age int not null,
+	Primary Key(EmployeeID)
+);
+Create table TechnicalConsultant(
+	EmployeeID int primary key references Consultant(EmployeeID)
+);
 
--- create technical consultant table
+Create table BusinessConsultant(
+	EmployeeID int primary key references Consultant(EmployeeID)
+);
+
 Create table ServicesPerformed(
-	ServicesPerformedID int primary key,
+	ServicesPerformedID int,
 	Date datetime not null,
 	Amount decimal(8,2) not null,
+	Primary Key(ServicesPerformedID),
 	CustomerID int Foreign Key References Customer(CustomerID),
 	TechnicalConsultantID int Foreign Key References TechnicalConsultant(EmployeeID));
 
 Create table LocationHasServicesPerformed(
 	LocationID int,
 	CustomerID int,
-	Constraint FK_Location foreign key (LocationID, CustomerID) references Location(LocationID,CustomerID),
+	Constraint FK_Location Foreign Key (LocationID, CustomerID) references Location(LocationID,CustomerID),
 	ServicesPerformedID int Foreign Key References ServicesPerformed(ServicesPerformedID),
 	Primary Key(LocationID, CustomerID, ServicesPerformedID));
 
-Create Table Service(
-	ServiceId int primary key,
+
+
+Create table Estimate(
+	EstimateID int,
+	Date datetime not null,
+	Amount decimal(8,2) not null,
+	Primary Key(EstimateID),
+	BusinessConsultant int Foreign Key References BusinessConsultant(EmployeeID),
+	CustomerID int Foreign Key References Customer(CustomerID)
+);
+
+Create table Service(
+	ServiceID int,
 	Description varchar(45),
-	Cost Decimal(6,2),
+	Cost decimal(6,2) not null,
 	Coverage varchar(45),
-	ClearanceRequired varchar(45));
+	ClearanceRequired varchar(45),
+	Primary Key(ServiceID)
+);
 
-Create Table Estimate(
-	EstimateID int primary key,
-	Date datetime,
-	Amount decimal(8,2),
-	BusinessConsultant int foreign key references BusinessConsultant(EmployeeID),
-	CustomerID int foreign key references Customer(CustomerID));
+Create table EstimateHasService(
+	EstimateID int Foreign Key References Estimate(EstimateID),
+	ServiceID int Foreign Key References Service(ServiceID),
+	Primary Key(EstimateID, ServiceID)
+);
 
-Create Table Estimate_Has_Service(
-	EstimateID int foreign key references Estimate(EstimateID),
-	ServiceID int foreign key references Service(ServiceID),
-	primary key (EstimateID, ServiceID));
+Create table ServicesPerformedHasService(
+	ServicesPerformedID int Foreign Key References ServicesPerformed(ServicesPerformedID),
+	ServiceID int Foreign Key References Service(ServiceID),
+	Primary Key(ServicesPerformedID, ServiceID)
+);
 
+Create table TechnicalSkill(
+	TechnicalSkillID varchar(45),
+	Description varchar(45),
+	EmployeeID int Foreign Key References TechnicalConsultant(EmployeeID),
+	Primary Key(TechnicalSkillID)
+);
+
+Create table BusinessExperience(
+	BusinessExperienceID int,
+	NumberOfYears int not null,
+	TypeOfBusiness varchar(45),
+	EmployeeID int Foreign Key References BusinessConsultant(EmployeeID),
+	Primary Key(BusinessExperienceID)
+);
+
+Create table Degree(
+	DegreeID varchar(45),
+	Description varchar(45),
+	Primary Key(DegreeID)
+);
+
+Create table BusinessExperienceHasDegree(
+	BusinessExperienceID int Foreign Key References BusinessExperience(BusinessExperienceID),
+	DegreeID varchar(45) Foreign Key References Degree(DegreeID),
+	Primary Key(BusinessExperienceID, DegreeID)
+);
+
+Create table TechnicalConsultantHasDegree(
+	EmployeeID int Foreign Key References TechnicalConsultant(EmployeeID),
+	DegreeID varchar(45) Foreign Key References Degree(DegreeID),
+	Primary Key(EmployeeID, DegreeID)
+);
 
 
 insert Service(ServiceId,Description,Cost,Coverage,ClearanceRequired) values (10,'Penetration Testing',1000,'Full','High');
@@ -101,9 +153,9 @@ insert Location(CustomerID,LocationID, BuildingSize, Street, City, State, ZipCod
 	values (10,1,1000,'4320 Main St.', 'Fort Scott', 'KS', '66701', '667-123-3453');
 
 
-select ServiceId, (CONVERT(varchar(10), ServiceId) + '-' + Description) as FullName from Service
 
-
-
-
-commit tran
+rollback tran
+end try
+begin catch
+rollback tran
+end catch
