@@ -87,9 +87,23 @@ insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Teleph
 insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Telephone,DateOfBirth,Age) 
 	values (5,'John','Stevens','586 Main Drive','Fort Scott','KS','66701','435-342-6543','1/12/1994',25);
 
+
+
 insert BusinessConsultant(EmployeeID) values (3);
 insert BusinessConsultant(EmployeeID) values (5);
-insert TechnicalConsultant(EmployeeID) values (1);
+insert BusinessConsultant(EmployeeID) values (1);
+
+insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Telephone,DateOfBirth,Age) 
+	values (6,'Luke','Skywalker','445 Force Drive','Nevada','MO','64772','667-324-4568','12/1/1988',31);
+insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Telephone,DateOfBirth,Age) 
+	values (7,'Harry','Potter','123 Staircase Avenue','Kansas City','KS','64101','417-454-4569','3/30/1960',59);
+insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Telephone,DateOfBirth,Age) 
+	values (8,'Ron','Weesley','456 Rat Drive','Kansas City','KS','64102','435-342-4543','1/12/1994',25);
+
+insert TechnicalConsultant(EmployeeID) values (6);
+insert TechnicalConsultant(EmployeeID) values (7);
+insert TechnicalConsultant(EmployeeID) values (8);
+
 
 insert Customer(CustomerID,CompanyName, Street, City, State, 
 	ZipCode, ContactName, ContactTitle, ContactTelephone,
