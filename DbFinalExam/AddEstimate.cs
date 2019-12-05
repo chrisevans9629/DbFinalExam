@@ -65,7 +65,7 @@ namespace DbFinalExam
 
                 foreach (Service item in listBoxServices.Items)
                 {
-                    p.Execute("insert into Estimate_Has_Service(EstimateID, ServiceID) values (@Estimate,@Service)", new { Estimate = textBoxEstId.Text, Service = item.ServiceID }, t);
+                    p.Execute("insert into EstimateHasService(EstimateID, ServiceID) values (@Estimate,@Service)", new { Estimate = textBoxEstId.Text, Service = item.ServiceID }, t);
                 }
             });
 
@@ -107,7 +107,7 @@ where EstimateId = @EstimateId
         {
             Sql.Exe((p, t) =>
             {
-                p.Execute("delete Estimate_Has_Service where EstimateId = @id", new { id = textBoxEstId.Text }, t);
+                p.Execute("delete EstimateHasService where EstimateId = @id", new { id = textBoxEstId.Text }, t);
                 p.Execute("delete Estimate where EstimateID = @id", new {id = textBoxEstId.Text},t);
             });
             Refresh();
@@ -130,7 +130,7 @@ where EstimateId = @EstimateId
                 p.Query<Service>(
                     @"
 select s.ServiceId, (CONVERT(varchar(10), s.ServiceId) + '-' + Description) as FullName 
-from Service s, Estimate_Has_Service ehs 
+from Service s, EstimateHasService ehs 
 where s.ServiceId = ehs.ServiceID and ehs.EstimateID = @EstimateID",
                     new { EstimateID = row.Cells["EstimateID"].Value.ToString() }));
 
@@ -138,6 +138,11 @@ where s.ServiceId = ehs.ServiceID and ehs.EstimateID = @EstimateID",
             {
                 listBoxServices.Items.Add(service);
             }
+        }
+
+        private void TextBoxEstId_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

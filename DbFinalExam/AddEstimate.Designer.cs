@@ -220,6 +220,7 @@
             this.textBoxEstId.Name = "textBoxEstId";
             this.textBoxEstId.Size = new System.Drawing.Size(100, 20);
             this.textBoxEstId.TabIndex = 34;
+            this.textBoxEstId.TextChanged += new System.EventHandler(this.TextBoxEstId_TextChanged);
             // 
             // AddEstimate
             // 
