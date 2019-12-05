@@ -102,4 +102,8 @@ insert Location(CustomerID,LocationID, BuildingSize, Street, City, State, ZipCod
 
 
 select ServiceId, (CONVERT(varchar(10), ServiceId) + '-' + Description) as FullName from Service
+
+
+
+
 commit tran

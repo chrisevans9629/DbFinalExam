@@ -26,8 +26,8 @@ namespace DbFinalExam
         private void Refresh()
         {
             comboBoxCustomer.BindQuery("select * from Customer", "CompanyName");
-            comboBoxBusCon.BindQuery("select * from Consultant c, BusinessConsultant bc where bc.EmployeeID = c.EmployeeID",
-                "LastName");
+            comboBoxBusCon.BindQuery("select *,(FirstName + ' ' + LastName) as Name from Consultant c, BusinessConsultant bc where bc.EmployeeID = c.EmployeeID",
+                "Name");
             comboBoxServices.BindQuery(
                 "select ServiceId, (CONVERT(varchar(10), ServiceId) + '-' + Description) as FullName from Service", "FullName");
             this.dataGridView1.BindQuery("select * from Estimate");
@@ -37,11 +37,8 @@ namespace DbFinalExam
 
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            var row = dataGridView1.Rows[e.RowIndex];
+           
 
-            dateTimePicker.Value = DateTime.Parse(row.Cells["Date"].Value.ToString());
-            textBoxAmount.Text = row.Cells["Amount"].Value.ToString();
-          
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -54,7 +51,7 @@ namespace DbFinalExam
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            Sql.Exe((p,t)=> 
+            Sql.Exe((p, t) =>
             {
                 p.Execute("INSERT INTO [dbo].[Estimate] ([EstimateID] ,[Date] ,[Amount] ,[BusinessConsultant], CustomerID) VALUES (@EstimateId ,@Date ,@Amount ,@BusinessConsultant, @CustomerID)",
                     new
@@ -63,12 +60,12 @@ namespace DbFinalExam
                         Date = dateTimePicker.Value,
                         Amount = textBoxAmount.Text,
                         BusinessConsultant = comboBoxBusCon.SelectedItem.GetDataRowValue("EmployeeID"),
-                        CustomerID = comboBoxCustomer.GetDataRowValue("CustomerID")
-                    },t);
+                        CustomerID = comboBoxCustomer.SelectedItem.GetDataRowValue("CustomerID")
+                    }, t);
 
-                foreach (var item in listBoxServices.Items)
+                foreach (Service item in listBoxServices.Items)
                 {
-                    p.Execute("insert into Estimate_Has_Service(EstimateID, ServiceID) values (@Estimate,@Service)", new {Estimate = textBoxEstId.Text, Service = item.GetDataRowValue("ServiceID")}, t);
+                    p.Execute("insert into Estimate_Has_Service(EstimateID, ServiceID) values (@Estimate,@Service)", new { Estimate = textBoxEstId.Text, Service = item.ServiceID }, t);
                 }
             });
 
@@ -78,6 +75,69 @@ namespace DbFinalExam
         private void Button4_Click(object sender, EventArgs e)
         {
             Refresh();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Sql.Exe((p, t) =>
+            {
+                p.Execute(@"
+UPDATE [dbo].[Estimate] 
+set [Date] = @Date,[Amount] = @Amount,[BusinessConsultant] = @BusinessConsultant, [CustomerID] = @CustomerID 
+where EstimateId = @EstimateId 
+",
+                    new
+                    {
+                        EstimateId = textBoxEstId.Text,
+                        Date = dateTimePicker.Value,
+                        Amount = textBoxAmount.Text,
+                        BusinessConsultant = comboBoxBusCon.SelectedItem.GetDataRowValue("EmployeeID"),
+                        CustomerID = comboBoxCustomer.SelectedItem.GetDataRowValue("CustomerID")
+                    }, t);
+
+                //foreach (Service item in listBoxServices.Items)
+                //{
+                //    p.Execute("update Estimate_Has_Service set (EstimateID, ServiceID) values (@Estimate,@Service)", new { Estimate = textBoxEstId.Text, Service = item.ServiceID }, t);
+                //}
+            });
+            Refresh();
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            Sql.Exe((p, t) =>
+            {
+                p.Execute("delete Estimate_Has_Service where EstimateId = @id", new { id = textBoxEstId.Text }, t);
+                p.Execute("delete Estimate where EstimateID = @id", new {id = textBoxEstId.Text},t);
+            });
+            Refresh();
+        }
+
+        private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = dataGridView1.Rows[e.RowIndex];
+
+            dateTimePicker.Value = DateTime.Parse(row.Cells["Date"].Value.ToString());
+            textBoxAmount.Text = row.Cells["Amount"].Value.ToString();
+            textBoxEstId.Text = row.Cells["EstimateID"].Value.ToString();
+            comboBoxBusCon.SelectedItem =
+                comboBoxBusCon.Items.Cast<DataRowView>().FirstOrDefault(p => p.GetDataRowValue("EmployeeID") == row.Cells["BusinessConsultant"].Value.ToString());
+            comboBoxCustomer.SelectedItem = comboBoxCustomer.Items.Cast<DataRowView>().FirstOrDefault(p =>
+                p.GetDataRowValue("CustomerID") == row.Cells["CustomerID"].Value.ToString());
+
+            listBoxServices.Items.Clear();
+            var services = Sql.Exe(p =>
+                p.Query<Service>(
+                    @"
+select s.ServiceId, (CONVERT(varchar(10), s.ServiceId) + '-' + Description) as FullName 
+from Service s, Estimate_Has_Service ehs 
+where s.ServiceId = ehs.ServiceID and ehs.EstimateID = @EstimateID",
+                    new { EstimateID = row.Cells["EstimateID"].Value.ToString() }));
+
+            foreach (var service in services)
+            {
+                listBoxServices.Items.Add(service);
+            }
         }
     }
 
