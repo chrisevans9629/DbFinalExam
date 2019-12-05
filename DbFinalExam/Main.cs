@@ -19,7 +19,8 @@ namespace DbFinalExam
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            var sales = new SalesReport();
+            sales.ShowDialog();
         }
 
         private void button8_Click(object sender, EventArgs e)
