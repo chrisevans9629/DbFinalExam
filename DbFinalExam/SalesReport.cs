@@ -16,5 +16,11 @@ namespace DbFinalExam
         {
             InitializeComponent();
         }
+
+        private void SalesReport_Load(object sender, EventArgs e)
+        {
+            dateTimePickerFrom.Value = DateTime.Now;
+            dateTimePickerTo.Value = DateTime.Now.AddMonths(1);
+        }
     }
 }
