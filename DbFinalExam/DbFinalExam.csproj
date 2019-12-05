@@ -88,6 +88,12 @@
     <Compile Include="SalesReport.Designer.cs">
       <DependentUpon>SalesReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="ServicesPerformed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServicesPerformed.Designer.cs">
+      <DependentUpon>ServicesPerformed.cs</DependentUpon>
+    </Compile>
     <Compile Include="SignIn.cs">
       <SubType>Form</SubType>
     </Compile>
