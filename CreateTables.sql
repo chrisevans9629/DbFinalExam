@@ -278,8 +278,13 @@ INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUE
 INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (1,10);
 INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (1,12);
 
+
+
 INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (2,11,2,300,'1/3/2020');
 INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (2,11);
+
+
+
 
 INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (3,12,3,3000,'2/6/2020');
 INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (3,13);
@@ -290,6 +295,24 @@ INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (4,11);
 
 INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (5,14,5,3000,'3/5/2020');
 INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (5,13);
+
+INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (1,10,6,2100,'12/30/2019');
+INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (1,10);
+INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (1,12);
+
+INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (2,11,7,300,'1/5/2020');
+INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (2,11);
+
+INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (3,12,8,3150.89,'2/8/2020');
+INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (3,13);
+
+INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (4,13,9,700,'1/20/2020');
+INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (4,14);
+INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (4,11);
+
+INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (5,14,10,3500,'3/10/2020');
+INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (5,13);
+
 
 INSERT INTO TechnicalConsultantHasDegree(DegreeID,EmployeeID) VALUES ('ACCTG',6);
 INSERT INTO TechnicalConsultantHasDegree(DegreeID,EmployeeID) VALUES ('CS',7);
@@ -302,6 +325,12 @@ INSERT INTO TechnicalSkill(TechnicalSkillID,EmployeeID,Description) VALUES ('COD
 INSERT INTO TechnicalSkill(TechnicalSkillID,EmployeeID,Description) VALUES ('SALES',8,'Sales & Marketing');
 INSERT INTO TechnicalSkill(TechnicalSkillID,EmployeeID,Description) VALUES ('PHYSC',9,'Physical Security');
 INSERT INTO TechnicalSkill(TechnicalSkillID,EmployeeID,Description) VALUES ('BACKUP',10,'Contingency Planning & Backup');
+
+INSERT INTO LocationHasServicesPerformed(ServicesPerformedID,CustomerID,LocationID) VALUES (1,10,1);
+INSERT INTO LocationHasServicesPerformed(ServicesPerformedID,CustomerID,LocationID) VALUES (2,11,1);
+INSERT INTO LocationHasServicesPerformed(ServicesPerformedID,CustomerID,LocationID) VALUES (3,12,1);
+INSERT INTO LocationHasServicesPerformed(ServicesPerformedID,CustomerID,LocationID) VALUES (4,13,1);
+INSERT INTO LocationHasServicesPerformed(ServicesPerformedID,CustomerID,LocationID) VALUES (5,14,1);
 
 commit tran;
 end try
