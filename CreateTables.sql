@@ -275,7 +275,17 @@ insert Location(CustomerID,LocationID, BuildingSize, Street, City, State, ZipCod
 	values (14,1,4566,'2345 Main St.', 'Pittsburg', 'KS', '66762', '667-123-4452');
 
 
+INSERT INTO TechnicalConsultantHasDegree(DegreeID,EmployeeID) VALUES ('ACCTG',6);
+INSERT INTO TechnicalConsultantHasDegree(DegreeID,EmployeeID) VALUES ('CS',7);
+INSERT INTO TechnicalConsultantHasDegree(DegreeID,EmployeeID) VALUES ('HRM',8);
+INSERT INTO TechnicalConsultantHasDegree(DegreeID,EmployeeID) VALUES ('CIS',9);
+INSERT INTO TechnicalConsultantHasDegree(DegreeID,EmployeeID) VALUES ('MKTG',10);
 
+INSERT INTO TechnicalSkill(TechnicalSkillID,EmployeeID,Description) VALUES ('PEN TEST',6,'Pentration Testing');
+INSERT INTO TechnicalSkill(TechnicalSkillID,EmployeeID,Description) VALUES ('CODE',7,'Software Development');
+INSERT INTO TechnicalSkill(TechnicalSkillID,EmployeeID,Description) VALUES ('SALES',8,'Sales & Marketing');
+INSERT INTO TechnicalSkill(TechnicalSkillID,EmployeeID,Description) VALUES ('PHYSC',9,'Physical Security');
+INSERT INTO TechnicalSkill(TechnicalSkillID,EmployeeID,Description) VALUES ('BACKUP',10,'Contingency Planning & Backup');
 
 commit tran;
 end try
