@@ -73,7 +73,7 @@ namespace DbFinalExam
         }
 
 
-        public static void BindQuery(this DataGridView dgv, string sql)
+        public static void BindQuery(this DataGridView dgv, string sql, object parameters = null)
         {
             var dbConnectionString = Connection.ConnectionStr;
             using (var newAdapter = new SqlDataAdapter())
@@ -82,7 +82,13 @@ namespace DbFinalExam
                 var newDataset = new DataSet();
                 newAdapter.SelectCommand = new SqlCommand(sql, openConnection);
                 newAdapter.SelectCommand.Connection = openConnection;
-
+                if(parameters != null)
+                {
+                    foreach (var item in parameters.GetType().GetProperties())
+                    {
+                        newAdapter.SelectCommand.Parameters.AddWithValue("@" + item.Name, item.GetValue(parameters));
+                    }
+                }
                 openConnection.Open();
                 newAdapter.Fill(newDataset, "test");
 
