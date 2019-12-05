@@ -29,12 +29,37 @@ namespace DbFinalExam
             comboBoxBusCon.BindQuery("select *,(FirstName + ' ' + LastName) as Name from Consultant c, BusinessConsultant bc where bc.EmployeeID = c.EmployeeID",
                 "Name");
             comboBoxServices.BindQuery(
-                "select ServiceId, (CONVERT(varchar(10), ServiceId) + '-' + Description) as FullName from Service", "FullName");
+                "select ServiceId, (CONVERT(varchar(10), ServiceId) + '-' + Description + ' $' + Convert(varchar(10),Cost)) as FullName from Service", "FullName");
             this.dataGridView1.BindQuery("select * from Estimate");
             this.dateTimePicker.Value = DateTime.Today;
             this.textBoxAmount.Text = "0";
         }
+        private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = dataGridView1.Rows[e.RowIndex];
 
+            dateTimePicker.Value = DateTime.Parse(row.Cells["Date"].Value.ToString());
+            textBoxAmount.Text = row.Cells["Amount"].Value.ToString();
+            textBoxEstId.Text = row.Cells["EstimateID"].Value.ToString();
+            comboBoxBusCon.SelectedItem =
+                comboBoxBusCon.Items.Cast<DataRowView>().FirstOrDefault(p => p.GetDataRowValue("EmployeeID") == row.Cells["BusinessConsultant"].Value.ToString());
+            comboBoxCustomer.SelectedItem = comboBoxCustomer.Items.Cast<DataRowView>().FirstOrDefault(p =>
+                p.GetDataRowValue("CustomerID") == row.Cells["CustomerID"].Value.ToString());
+
+            listBoxServices.Items.Clear();
+            var services = Sql.Exe(p =>
+                p.Query<Service>(
+                    @"
+select s.ServiceId, (CONVERT(varchar(10), s.ServiceId) + '-' + Description + ' $' + Convert(varchar(10),Cost)) as FullName 
+from Service s, EstimateHasService ehs 
+where s.ServiceId = ehs.ServiceID and ehs.EstimateID = @EstimateID",
+                    new { EstimateID = row.Cells["EstimateID"].Value.ToString() }));
+
+            foreach (var service in services)
+            {
+                listBoxServices.Items.Add(service);
+            }
+        }
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
            
@@ -65,7 +90,7 @@ namespace DbFinalExam
 
                 foreach (Service item in listBoxServices.Items)
                 {
-                    p.Execute("insert into Estimate_Has_Service(EstimateID, ServiceID) values (@Estimate,@Service)", new { Estimate = textBoxEstId.Text, Service = item.ServiceID }, t);
+                    p.Execute("insert into EstimateHasService(EstimateID, ServiceID) values (@Estimate,@Service)", new { Estimate = textBoxEstId.Text, Service = item.ServiceID }, t);
                 }
             });
 
@@ -107,37 +132,17 @@ where EstimateId = @EstimateId
         {
             Sql.Exe((p, t) =>
             {
-                p.Execute("delete Estimate_Has_Service where EstimateId = @id", new { id = textBoxEstId.Text }, t);
+                p.Execute("delete EstimateHasService where EstimateId = @id", new { id = textBoxEstId.Text }, t);
                 p.Execute("delete Estimate where EstimateID = @id", new {id = textBoxEstId.Text},t);
             });
             Refresh();
         }
 
-        private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+       
+
+        private void TextBoxEstId_TextChanged(object sender, EventArgs e)
         {
-            var row = dataGridView1.Rows[e.RowIndex];
 
-            dateTimePicker.Value = DateTime.Parse(row.Cells["Date"].Value.ToString());
-            textBoxAmount.Text = row.Cells["Amount"].Value.ToString();
-            textBoxEstId.Text = row.Cells["EstimateID"].Value.ToString();
-            comboBoxBusCon.SelectedItem =
-                comboBoxBusCon.Items.Cast<DataRowView>().FirstOrDefault(p => p.GetDataRowValue("EmployeeID") == row.Cells["BusinessConsultant"].Value.ToString());
-            comboBoxCustomer.SelectedItem = comboBoxCustomer.Items.Cast<DataRowView>().FirstOrDefault(p =>
-                p.GetDataRowValue("CustomerID") == row.Cells["CustomerID"].Value.ToString());
-
-            listBoxServices.Items.Clear();
-            var services = Sql.Exe(p =>
-                p.Query<Service>(
-                    @"
-select s.ServiceId, (CONVERT(varchar(10), s.ServiceId) + '-' + Description) as FullName 
-from Service s, Estimate_Has_Service ehs 
-where s.ServiceId = ehs.ServiceID and ehs.EstimateID = @EstimateID",
-                    new { EstimateID = row.Cells["EstimateID"].Value.ToString() }));
-
-            foreach (var service in services)
-            {
-                listBoxServices.Items.Add(service);
-            }
         }
     }
 

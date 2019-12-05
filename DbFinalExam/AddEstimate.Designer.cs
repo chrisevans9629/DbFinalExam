@@ -98,13 +98,13 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(12, 157);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(43, 13);
+            this.label7.Size = new System.Drawing.Size(58, 13);
             this.label7.TabIndex = 23;
-            this.label7.Text = "Amount";
+            this.label7.Text = "Amount ($)";
             // 
             // textBoxAmount
             // 
-            this.textBoxAmount.Location = new System.Drawing.Point(61, 154);
+            this.textBoxAmount.Location = new System.Drawing.Point(76, 154);
             this.textBoxAmount.Name = "textBoxAmount";
             this.textBoxAmount.Size = new System.Drawing.Size(100, 20);
             this.textBoxAmount.TabIndex = 22;
@@ -220,6 +220,7 @@
             this.textBoxEstId.Name = "textBoxEstId";
             this.textBoxEstId.Size = new System.Drawing.Size(100, 20);
             this.textBoxEstId.TabIndex = 34;
+            this.textBoxEstId.TextChanged += new System.EventHandler(this.TextBoxEstId_TextChanged);
             // 
             // AddEstimate
             // 
