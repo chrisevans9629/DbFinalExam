@@ -1,5 +1,5 @@
-﻿begin tran
-begin try
+﻿begin try
+begin tran
 Create table Customer (
 	CustomerID int,
 	CompanyName varchar(45) not null,
@@ -111,9 +111,10 @@ Create table BusinessExperience(
 
 Create table Degree(
 	DegreeID varchar(45),
-	Description varchar(45),
+	Description varchar(100),
 	Primary Key(DegreeID)
 );
+
 
 Create table BusinessExperienceHasDegree(
 	BusinessExperienceID int Foreign Key References BusinessExperience(BusinessExperienceID),
@@ -130,7 +131,9 @@ Create table TechnicalConsultantHasDegree(
 
 insert Service(ServiceId,Description,Cost,Coverage,ClearanceRequired) values (10,'Penetration Testing',1000,'Full','High');
 insert Service(ServiceId,Description,Cost,Coverage,ClearanceRequired) values (11,'Physical Security',250,'Equipment','Low');
-insert Service(ServiceId,Description,Cost,ClearanceRequired) values (12,'Email Phishing Campaign',100,'Low');
+insert Service(ServiceId,Description,Cost,ClearanceRequired) values (12,'Email Phishing Campaign',100,'Medium');
+insert Service(ServiceId,Description,Cost,ClearanceRequired) values (13,'Contingency Plan',2000,'High');
+insert Service(ServiceId,Description,Cost,ClearanceRequired) values (14,'Denial of Service Testing',300,'Low');
 
 insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Telephone,DateOfBirth,Age) 
 	values (1,'Chris','Evans','423 Square Drive','Fort Scott','KS','66701','667-324-6978','12/1/1988',31);
@@ -138,12 +141,80 @@ insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Teleph
 	values (3,'Steve','Shire','542 Maple St.','Pittsburg','KS','66762','417-454-1243','3/30/1960',59);
 insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Telephone,DateOfBirth,Age) 
 	values (5,'John','Stevens','586 Main Drive','Fort Scott','KS','66701','435-342-6543','1/12/1994',25);
+insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Telephone,DateOfBirth,Age) 
+	values (2,'John','Snow','654 Game St','Cheyanne','WY','65464','435-342-1355','1/12/1994',25);
+insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Telephone,DateOfBirth,Age) 
+	values (4,'Catnis','Everdeen','349 Hunger Road','Fort Scott','KS','66701','435-342-6546','3/10/1933',86);
 
-
+insert Degree(DegreeID, Description) values ('CIS', 'Bachelor of Business Administration Computer Information Systems');
+insert Degree(DegreeID, Description) values ('CS', 'Bachelor of Science');
+insert Degree(DegreeID, Description) values ('ACCTG', 'Bachelor of Business Administration Accounting');
+insert Degree(DegreeID, Description) values ('HRM', 'Bachelor of Psychology Human Resource Management');
+insert Degree(DegreeID, Description) values ('MKTG', 'Bachelor of Business Administration Marketing');
 
 insert BusinessConsultant(EmployeeID) values (3);
 insert BusinessConsultant(EmployeeID) values (5);
 insert BusinessConsultant(EmployeeID) values (1);
+insert BusinessConsultant(EmployeeID) values (2);
+insert BusinessConsultant(EmployeeID) values (4);
+
+INSERT INTO [dbo].[BusinessExperience]
+           ([BusinessExperienceID]
+           ,[NumberOfYears]
+           ,[TypeOfBusiness]
+           ,[EmployeeID])
+     VALUES
+           (1
+           ,3
+           ,'Marketing'
+           ,3);
+INSERT INTO [dbo].[BusinessExperience]
+           ([BusinessExperienceID]
+           ,[NumberOfYears]
+           ,[TypeOfBusiness]
+           ,[EmployeeID])
+     VALUES
+           (2
+           ,5
+           ,'Security Consulting'
+           ,5);
+INSERT INTO [dbo].[BusinessExperience]
+           ([BusinessExperienceID]
+           ,[NumberOfYears]
+           ,[TypeOfBusiness]
+           ,[EmployeeID])
+     VALUES
+           (3
+           ,10
+           ,'Software Developer'
+           ,1);
+INSERT INTO [dbo].[BusinessExperience]
+           ([BusinessExperienceID]
+           ,[NumberOfYears]
+           ,[TypeOfBusiness]
+           ,[EmployeeID])
+     VALUES
+           (4
+           ,7
+           ,'Pentration Testing'
+           ,2);
+INSERT INTO [dbo].[BusinessExperience]
+           ([BusinessExperienceID]
+           ,[NumberOfYears]
+           ,[TypeOfBusiness]
+           ,[EmployeeID])
+     VALUES
+           (5
+           ,1
+           ,'Physical Security'
+           ,4);
+
+
+INSERT INTO BusinessExperienceHasDegree(BusinessExperienceID,DegreeID) values (1,'MKTG');
+INSERT INTO BusinessExperienceHasDegree(BusinessExperienceID,DegreeID) values (2,'CIS');
+INSERT INTO BusinessExperienceHasDegree(BusinessExperienceID,DegreeID) values (3,'CS');
+INSERT INTO BusinessExperienceHasDegree(BusinessExperienceID,DegreeID) values (4,'CS');
+INSERT INTO BusinessExperienceHasDegree(BusinessExperienceID,DegreeID) values (5,'ACCTG');
 
 insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Telephone,DateOfBirth,Age) 
 	values (6,'Luke','Skywalker','445 Force Drive','Nevada','MO','64772','667-324-4568','12/1/1988',31);
@@ -151,10 +222,16 @@ insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Teleph
 	values (7,'Harry','Potter','123 Staircase Avenue','Kansas City','KS','64101','417-454-4569','3/30/1960',59);
 insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Telephone,DateOfBirth,Age) 
 	values (8,'Ron','Weesley','456 Rat Drive','Kansas City','KS','64102','435-342-4543','1/12/1994',25);
+insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Telephone,DateOfBirth,Age) 
+	values (9,'John','Larrinson','544 Larry Avenue','Ballard','MO','64123','417-654-7998','3/12/1960',59);
+insert Consultant(EmployeeID,FirstName,LastName,Street,City,State,ZipCode,Telephone,DateOfBirth,Age) 
+	values (10,'Drako','Mouthful','456 Snake Street','Kansas City','KS','64102','435-342-4543','4/12/1994',25);
 
 insert TechnicalConsultant(EmployeeID) values (6);
 insert TechnicalConsultant(EmployeeID) values (7);
 insert TechnicalConsultant(EmployeeID) values (8);
+insert TechnicalConsultant(EmployeeID) values (9);
+insert TechnicalConsultant(EmployeeID) values (10);
 
 
 insert Customer(CustomerID,CompanyName, Street, City, State, 
@@ -163,13 +240,45 @@ insert Customer(CustomerID,CompanyName, Street, City, State,
 	values 
 	(10,'Peerless Products Inc.', '4320 Main St.', 'Fort Scott', 'KS', '66701', 'Steven Burn','IT Manager', '667-123-4654', 'Manufacturing', 400);
 
+insert Customer(CustomerID,CompanyName, Street, City, State, 
+	ZipCode, ContactName, ContactTitle, ContactTelephone,
+	BusinessType, NumberOfEmployees) 
+	values 
+	(11,'Pittsburg State University', '1701 S Broadway', 'Pittsburg', 'KS', '66762', 'Dr. Sha','CIS Professor', '667-123-3254', 'Education', 312);
+insert Customer(CustomerID,CompanyName, Street, City, State, 
+	ZipCode, ContactName, ContactTitle, ContactTelephone,
+	BusinessType, NumberOfEmployees) 
+	values 
+	(12,'McDonalds', '2342 Maple St.', 'Fort Scott', 'KS', '66701', 'Ronald McDonald','Marketing', '667-123-2345', 'Restaurant', 10);
+insert Customer(CustomerID,CompanyName, Street, City, State, 
+	ZipCode, ContactName, ContactTitle, ContactTelephone,
+	BusinessType, NumberOfEmployees) 
+	values 
+	(13,'Salon 9', '5843 1st Street', 'Pittsburg', 'KS', '66762', 'Sally Salington','Branch Manager', '667-345-3453', 'Cosmetology', 15);
+insert Customer(CustomerID,CompanyName, Street, City, State, 
+	ZipCode, ContactName, ContactTitle, ContactTelephone,
+	BusinessType, NumberOfEmployees) 
+	values 
+	(14,'Watko', '2345 Main St.', 'Pittsburg', 'KS', '66762', 'John Wattson','Plant Manager', '667-123-3453', 'Manufacturing', 345);
+
+
+
 insert Location(CustomerID,LocationID, BuildingSize, Street, City, State, ZipCode, Telephone)
-	values (10,1,1000,'4320 Main St.', 'Fort Scott', 'KS', '66701', '667-123-3453');
+	values (10,1,123,'4320 Main St.', 'Fort Scott', 'KS', '66701', '667-123-3453');
+insert Location(CustomerID,LocationID, BuildingSize, Street, City, State, ZipCode, Telephone)
+	values (11,1,1245,'1701 S Broadway', 'Pittsburg', 'KS', '66762', '667-123-4567');
+insert Location(CustomerID,LocationID, BuildingSize, Street, City, State, ZipCode, Telephone)
+	values (12,1,45668,'2342 Maple St.', 'Fort Scott', 'KS', '66701', '667-123-7569');
+insert Location(CustomerID,LocationID, BuildingSize, Street, City, State, ZipCode, Telephone)
+	values (13,1,7894,'5843 1st Street', 'Pittsburg', 'KS', '66762', '667-123-7522');
+insert Location(CustomerID,LocationID, BuildingSize, Street, City, State, ZipCode, Telephone)
+	values (14,1,4566,'2345 Main St.', 'Pittsburg', 'KS', '66762', '667-123-4452');
 
 
 
-rollback tran
+
+commit tran;
 end try
 begin catch
-rollback tran
+	rollback tran
 end catch
