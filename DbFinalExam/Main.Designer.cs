@@ -31,7 +31,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -65,22 +64,13 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(171, 42);
             this.button6.TabIndex = 5;
-            this.button6.Text = "Update Service Performed";
+            this.button6.Text = "Services Performed";
             this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(67, 180);
-            this.button7.Margin = new System.Windows.Forms.Padding(2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(171, 42);
-            this.button7.TabIndex = 4;
-            this.button7.Text = "Add Service Performed";
-            this.button7.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.Button6_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(67, 226);
+            this.button5.Location = new System.Drawing.Point(67, 176);
             this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(171, 42);
@@ -91,7 +81,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(67, 272);
+            this.button8.Location = new System.Drawing.Point(67, 222);
             this.button8.Margin = new System.Windows.Forms.Padding(2);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(171, 42);
@@ -108,7 +98,6 @@
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button6);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -123,7 +112,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button8;
     }

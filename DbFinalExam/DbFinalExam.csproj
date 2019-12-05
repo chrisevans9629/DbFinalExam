@@ -122,6 +122,9 @@
     <EmbeddedResource Include="SalesReport.resx">
       <DependentUpon>SalesReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ServicesPerformed.resx">
+      <DependentUpon>ServicesPerformed.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
     </EmbeddedResource>

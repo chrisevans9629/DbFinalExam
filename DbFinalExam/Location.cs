@@ -10,5 +10,11 @@
         public string Telephone { get; set; }
         public int BuildingSize { get; set; }
         public string State { get; set; }
+        public string Address { get; set; }
+
+        public override string ToString()
+        {
+            return Address;
+        }
     }
 }
