@@ -274,43 +274,38 @@ insert Location(CustomerID,LocationID, BuildingSize, Street, City, State, ZipCod
 insert Location(CustomerID,LocationID, BuildingSize, Street, City, State, ZipCode, Telephone)
 	values (14,1,4566,'2345 Main St.', 'Pittsburg', 'KS', '66762', '667-123-4452');
 
-INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (1,10,1,2000,'12/30/2019');
+INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (1,10,1,2000,'11/30/2019');
 INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (1,10);
 INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (1,12);
 
-
-
-INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (2,11,2,300,'1/3/2020');
+INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (2,11,2,300,'11/3/2019');
 INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (2,11);
 
-
-
-
-INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (3,12,3,3000,'2/6/2020');
+INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (3,12,3,3000,'12/6/2019');
 INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (3,13);
 
-INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (4,13,4,700,'1/15/2020');
+INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (4,13,4,700,'11/15/2019');
 INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (4,14);
 INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (4,11);
 
-INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (5,14,5,3000,'3/5/2020');
+INSERT INTO Estimate(EstimateID,CustomerID,BusinessConsultant,Amount,Date) VALUES (5,14,5,3000,'12/5/2019');
 INSERT INTO EstimateHasService(EstimateID,ServiceID) VALUES (5,13);
 
-INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (1,10,6,2100,'12/30/2019');
+INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (1,10,6,2100,'11/30/2019');
 INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (1,10);
 INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (1,12);
 
-INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (2,11,7,300,'1/5/2020');
+INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (2,11,7,300,'11/5/2019');
 INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (2,11);
 
-INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (3,12,8,3150.89,'2/8/2020');
+INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (3,12,8,3150.89,'12/8/2019');
 INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (3,13);
 
-INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (4,13,9,700,'1/20/2020');
+INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (4,13,9,700,'11/20/2019');
 INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (4,14);
 INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (4,11);
 
-INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (5,14,10,3500,'3/10/2020');
+INSERT INTO ServicesPerformed(ServicesPerformedID,CustomerID,TechnicalConsultantID,Amount,Date) VALUES (5,14,10,3500,'12/10/2019');
 INSERT INTO ServicesPerformedHasService(ServicesPerformedID,ServiceID) VALUES (5,13);
 
 
