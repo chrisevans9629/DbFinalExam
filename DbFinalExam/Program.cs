@@ -19,7 +19,11 @@ namespace DbFinalExam
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+#if TestDb
+            Application.Run(new Main());
+#else
             Application.Run(new SignIn());
+#endif
         }
     }
 }

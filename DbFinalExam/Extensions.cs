@@ -1,12 +1,37 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace DbFinalExam
 {
     public static class Extensions
     {
+        public static string GetDataRowValue(this object obj, string column)
+        {
+            if (obj is DataRowView view)
+            {
+                return view.Row[column]?.ToString();
+            }
+            throw new InvalidOperationException($"{obj} is not a DataRowView");
+        }
 
+        public static T DataRowViewToObject<T>(this object obj) where T : new()
+        {
+            if (obj is DataRowView row)
+            {
+                var t = new T();
+
+                foreach (var propertyInfo in t.GetType().GetProperties())
+                {
+                    propertyInfo.SetValue(t,row.Row[propertyInfo.Name]);
+                }
+
+                return t;
+            }
+            throw  new InvalidOperationException($"{obj} is not a DataRowView");
+        }
         public static void BindQuery(this ComboBox cbo, string sql, string sqlColumnName)
         {
             var dbConnectionString = Connection.ConnectionStr;

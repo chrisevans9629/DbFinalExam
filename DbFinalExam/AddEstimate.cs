@@ -46,25 +46,49 @@ namespace DbFinalExam
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            listBoxServices.Items.Add(comboBoxServices.SelectedItem);
+            if (comboBoxServices.SelectedItem is DataRowView view)
+            {
+                listBoxServices.Items.Add(comboBoxServices.SelectedItem.DataRowViewToObject<Service>());
+            }
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             Sql.Exe((p,t)=> 
             {
-                p.Execute("insert into Estimate() values ()",null,t);
+                p.Execute("INSERT INTO [dbo].[Estimate] ([EstimateID] ,[Date] ,[Amount] ,[BusinessConsultant], CustomerID) VALUES (@EstimateId ,@Date ,@Amount ,@BusinessConsultant, @CustomerID)",
+                    new
+                    {
+                        EstimateId = textBoxEstId.Text,
+                        Date = dateTimePicker.Value,
+                        Amount = textBoxAmount.Text,
+                        BusinessConsultant = comboBoxBusCon.SelectedItem.GetDataRowValue("EmployeeID"),
+                        CustomerID = comboBoxCustomer.GetDataRowValue("CustomerID")
+                    },t);
 
                 foreach (var item in listBoxServices.Items)
                 {
-                    p.Execute("insert into Estimate_Has_Service() values ()", null, t);
+                    p.Execute("insert into Estimate_Has_Service(EstimateID, ServiceID) values (@Estimate,@Service)", new {Estimate = textBoxEstId.Text, Service = item.GetDataRowValue("ServiceID")}, t);
                 }
             });
+
+            Refresh();
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
             Refresh();
+        }
+    }
+
+    public class Service
+    {
+        public int ServiceID { get; set; }
+        public string FullName { get; set; }
+
+        public override string ToString()
+        {
+            return $"{FullName}";
         }
     }
 }

@@ -66,7 +66,8 @@ Create Table Estimate(
 	EstimateID int primary key,
 	Date datetime,
 	Amount decimal(8,2),
-	BusinessConsultant int foreign key references BusinessConsultant(EmployeeID));
+	BusinessConsultant int foreign key references BusinessConsultant(EmployeeID),
+	CustomerID int foreign key references Customer(CustomerID));
 
 Create Table Estimate_Has_Service(
 	EstimateID int foreign key references Estimate(EstimateID),
