@@ -9,5 +9,6 @@
         public string ZipCode { get; set; }
         public string Telephone { get; set; }
         public int BuildingSize { get; set; }
+        public string State { get; set; }
     }
 }

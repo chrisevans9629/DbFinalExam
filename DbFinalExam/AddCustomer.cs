@@ -47,7 +47,8 @@ namespace DbFinalExam
                         LocationId = locId,
                         Street = textBoxLocStrt.Text,
                         Telephone = textBoxLocTel.Text,
-                        ZipCode = textBoxLocZip.Text
+                        ZipCode = textBoxLocZip.Text,
+                        State = textBoxLocState.Text
                     });
                     Locations = loc;
                     button1.Enabled = true;
@@ -68,13 +69,49 @@ namespace DbFinalExam
                 var tran = db.BeginTransaction();
                 try
                 {
-                    db.Execute("insert into Customer() values ()", null, tran);
+                    db.Execute(@"
+INSERT INTO [dbo].[Customer] ([CustomerID] ,[CompanyName] ,[Street] ,[City] ,[State] ,[ZipCode] ,[ContactName] ,[ContactTitle] ,[ContactTelephone] ,[BusinessType] ,[NumberOfEmployees]) 
+VALUES (@CustomerID ,@CompanyName ,@Street ,@City ,@State ,@ZipCode ,@ContactName ,@ContactTitle ,@ContactTelephone ,@BusinessType ,@NumberOfEmployees )", new
+                    {
+                        CustomerId = textBoxCustomerId.Text,
+                        CompanyName = textBoxCompanyName.Text,
+                        Street = textBoxStrt.Text,
+                        City = textBoxCity.Text,
+                        State = textBoxState.Text,
+                        ZipCode = textBoxZip.Text,
+                        ContactName = textBoxConName.Text,
+                        ContactTelephone = textBoxConTel.Text,
+                        BusinessType = textBoxBusType.Text,
+                        NumberOfEmployees = textBoxNumEmp.Text,
+                        ContactTitle = textBoxConTitle.Text
+                    }, tran);
 
                     foreach (var location in Locations)
                     {
-                        db.Execute("insert into Location() values ()", null, tran);
+                        db.Execute(
+                            @"
+INSERT INTO [dbo].[Location]
+           ([LocationID]
+           ,[CustomerID]
+           ,[Street]
+           ,[City]
+           ,[State]
+           ,[ZipCode]
+           ,[Telephone]
+           ,[BuildingSize])
+     VALUES
+           (@LocationID		
+           ,@CustomerID		
+           ,@Street			
+           ,@City			
+           ,@State			
+           ,@ZipCode		
+           ,@Telephone		
+           ,@BuildingSize)
+", location, tran);
                     }
                     tran.Commit();
+                    this.Close();
                 }
                 catch (Exception ex)
                 {
