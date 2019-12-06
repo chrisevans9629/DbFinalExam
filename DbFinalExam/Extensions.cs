@@ -52,7 +52,29 @@ namespace DbFinalExam
                     cbo.SelectedIndex = 0;
             }
         }
+        public static void BindQuery(this Label lbl, string sql, object parameters, string sqlColumnName)
+        {
+            var dbConnectionString = Connection.ConnectionStr;
+            using (var newAdapter = new SqlDataAdapter())
+            using (var openConnection = new SqlConnection(dbConnectionString))
+            {
+                var newDataset = new DataSet();
+                newAdapter.SelectCommand = new SqlCommand(sql, openConnection);
+                newAdapter.SelectCommand.Connection = openConnection;
+                if (parameters != null)
+                {
+                    foreach (var item in parameters.GetType().GetProperties())
+                    {
+                        newAdapter.SelectCommand.Parameters.AddWithValue("@" + item.Name, item.GetValue(parameters));
+                    }
+                }
+                openConnection.Open();
+                newAdapter.Fill(newDataset, "test");
+                lbl.DataBindings.Clear();
+                lbl.DataBindings.Add("Text", newDataset, $"test.{sqlColumnName}");
+            }
 
+        }
 
         public static void BindQuery(this Label lbl, string sql, string sqlColumnName)
         {
@@ -66,6 +88,7 @@ namespace DbFinalExam
 
                 openConnection.Open();
                 newAdapter.Fill(newDataset, "test");
+                lbl.DataBindings.Clear();
 
                 lbl.DataBindings.Add("Text", newDataset, $"test.{sqlColumnName}");
             }

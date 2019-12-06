@@ -33,6 +33,7 @@
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.labelSales = new System.Windows.Forms.Label();
             this.labelEstimates = new System.Windows.Forms.Label();
@@ -40,16 +41,15 @@
             this.labelProfit = new System.Windows.Forms.Label();
             this.labelEstCost = new System.Windows.Forms.Label();
             this.labelEstProfit = new System.Windows.Forms.Label();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -107,6 +107,30 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Sales Report";
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.dataGridView1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.labelSales);
+            this.splitContainer2.Panel2.Controls.Add(this.labelEstimates);
+            this.splitContainer2.Panel2.Controls.Add(this.labelCost);
+            this.splitContainer2.Panel2.Controls.Add(this.labelProfit);
+            this.splitContainer2.Panel2.Controls.Add(this.labelEstCost);
+            this.splitContainer2.Panel2.Controls.Add(this.labelEstProfit);
+            this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.SplitContainer2_Panel2_Paint);
+            this.splitContainer2.Size = new System.Drawing.Size(800, 384);
+            this.splitContainer2.SplitterDistance = 302;
+            this.splitContainer2.TabIndex = 8;
+            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -137,7 +161,7 @@
             // labelCost
             // 
             this.labelCost.AutoSize = true;
-            this.labelCost.Location = new System.Drawing.Point(115, 16);
+            this.labelCost.Location = new System.Drawing.Point(172, 16);
             this.labelCost.Name = "labelCost";
             this.labelCost.Size = new System.Drawing.Size(55, 13);
             this.labelCost.TabIndex = 4;
@@ -146,7 +170,7 @@
             // labelProfit
             // 
             this.labelProfit.AutoSize = true;
-            this.labelProfit.Location = new System.Drawing.Point(229, 16);
+            this.labelProfit.Location = new System.Drawing.Point(350, 16);
             this.labelProfit.Name = "labelProfit";
             this.labelProfit.Size = new System.Drawing.Size(58, 13);
             this.labelProfit.TabIndex = 5;
@@ -155,7 +179,7 @@
             // labelEstCost
             // 
             this.labelEstCost.AutoSize = true;
-            this.labelEstCost.Location = new System.Drawing.Point(115, 40);
+            this.labelEstCost.Location = new System.Drawing.Point(172, 40);
             this.labelEstCost.Name = "labelEstCost";
             this.labelEstCost.Size = new System.Drawing.Size(98, 13);
             this.labelEstCost.TabIndex = 6;
@@ -164,34 +188,11 @@
             // labelEstProfit
             // 
             this.labelEstProfit.AutoSize = true;
-            this.labelEstProfit.Location = new System.Drawing.Point(229, 40);
+            this.labelEstProfit.Location = new System.Drawing.Point(350, 40);
             this.labelEstProfit.Name = "labelEstProfit";
             this.labelEstProfit.Size = new System.Drawing.Size(101, 13);
             this.labelEstProfit.TabIndex = 7;
             this.labelEstProfit.Text = "Total Estimate Profit";
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.dataGridView1);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.labelSales);
-            this.splitContainer2.Panel2.Controls.Add(this.labelEstimates);
-            this.splitContainer2.Panel2.Controls.Add(this.labelCost);
-            this.splitContainer2.Panel2.Controls.Add(this.labelProfit);
-            this.splitContainer2.Panel2.Controls.Add(this.labelEstCost);
-            this.splitContainer2.Panel2.Controls.Add(this.labelEstProfit);
-            this.splitContainer2.Size = new System.Drawing.Size(800, 384);
-            this.splitContainer2.SplitterDistance = 302;
-            this.splitContainer2.TabIndex = 8;
             // 
             // SalesReport
             // 
@@ -207,12 +208,12 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }

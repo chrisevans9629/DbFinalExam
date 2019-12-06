@@ -129,6 +129,9 @@ Create table TechnicalConsultantHasDegree(
 );
 
 
+
+
+
 insert Service(ServiceId,Description,Cost,Coverage,ClearanceRequired) values (10,'Penetration Testing',1000,'Full','High');
 insert Service(ServiceId,Description,Cost,Coverage,ClearanceRequired) values (11,'Physical Security',250,'Equipment','Low');
 insert Service(ServiceId,Description,Cost,ClearanceRequired) values (12,'Email Phishing Campaign',100,'Medium');
