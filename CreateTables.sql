@@ -52,8 +52,8 @@ Create table ServicesPerformed(
 	Date datetime not null,
 	Amount decimal(8,2) not null,
 	Primary Key(ServicesPerformedID),
-	CustomerID int Foreign Key References Customer(CustomerID),
-	TechnicalConsultantID int Foreign Key References TechnicalConsultant(EmployeeID));
+	CustomerID int Foreign Key References Customer(CustomerID) not null,
+	TechnicalConsultantID int Foreign Key References TechnicalConsultant(EmployeeID) not null);
 
 Create table LocationHasServicesPerformed(
 	LocationID int,
@@ -69,14 +69,14 @@ Create table Estimate(
 	Date datetime not null,
 	Amount decimal(8,2) not null,
 	Primary Key(EstimateID),
-	BusinessConsultant int Foreign Key References BusinessConsultant(EmployeeID),
-	CustomerID int Foreign Key References Customer(CustomerID)
+	BusinessConsultant int Foreign Key References BusinessConsultant(EmployeeID) not null,
+	CustomerID int Foreign Key References Customer(CustomerID) not null
 );
 
 Create table Service(
 	ServiceID int,
 	Description varchar(45),
-	Cost decimal(6,2) not null,
+	Cost decimal(8,2) not null,
 	Coverage varchar(45),
 	ClearanceRequired varchar(45),
 	Primary Key(ServiceID)
@@ -97,7 +97,7 @@ Create table ServicesPerformedHasService(
 Create table TechnicalSkill(
 	TechnicalSkillID varchar(45),
 	Description varchar(45),
-	EmployeeID int Foreign Key References TechnicalConsultant(EmployeeID),
+	EmployeeID int Foreign Key References TechnicalConsultant(EmployeeID) not null,
 	Primary Key(TechnicalSkillID)
 );
 
@@ -105,7 +105,7 @@ Create table BusinessExperience(
 	BusinessExperienceID int,
 	NumberOfYears int not null,
 	TypeOfBusiness varchar(45),
-	EmployeeID int Foreign Key References BusinessConsultant(EmployeeID),
+	EmployeeID int Foreign Key References BusinessConsultant(EmployeeID) not null,
 	Primary Key(BusinessExperienceID)
 );
 
