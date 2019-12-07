@@ -30,3 +30,17 @@ where Date >= @From and Date < @To
 select *,(Street + ' ' + City + ', ' + State + ' ' + ZipCode) as Address 
 from Location l, LocationHasServicesPerformed lsp
 where lsp.LocationID = l.LocationID and l.CustomerID = lsp.CustomerID
+
+select * from Customer
+
+
+select *,(FirstName + ' ' + LastName) as Name from Consultant c, BusinessConsultant bc where bc.EmployeeID = c.EmployeeID
+
+select ServiceId, (CONVERT(varchar(10), ServiceId) + '-' + Description + ' $' + Convert(varchar(10),Cost)) as FullName from Service
+
+
+declare @estimateId as int = 1;
+
+select s.ServiceId, (CONVERT(varchar(10), s.ServiceId) + '-' + Description + ' $' + Convert(varchar(10),Cost)) as FullName 
+from Service s, EstimateHasService ehs 
+where s.ServiceId = ehs.ServiceID and ehs.EstimateID = @EstimateID
