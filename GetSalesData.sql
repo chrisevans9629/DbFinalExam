@@ -24,3 +24,9 @@ from Estimate sp left outer join
 EstimateHasService sps on sps.EstimateID = sp.EstimateID left outer join
 Service s on s.ServiceID = sps.ServiceID
 where Date >= @From and Date < @To
+
+
+
+select *,(Street + ' ' + City + ', ' + State + ' ' + ZipCode) as Address 
+from Location l, LocationHasServicesPerformed lsp
+where lsp.LocationID = l.LocationID and l.CustomerID = lsp.CustomerID
