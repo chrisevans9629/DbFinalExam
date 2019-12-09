@@ -7,6 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbFinalExam", "DbFinalExam\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B119DEAD-334D-4666-8273-D2816903EDF6}"
 	ProjectSection(SolutionItems) = preProject
+		Advanced Db Final Security Consultants.docx = Advanced Db Final Security Consultants.docx
 		CreateTables.sql = CreateTables.sql
 		GetSalesData.sql = GetSalesData.sql
 	EndProjectSection
